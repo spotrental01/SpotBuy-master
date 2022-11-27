@@ -1,0 +1,132 @@
+{
+  "project_info": {
+    "project_number": "43317420718",
+    "project_id": "spotbuy-fafdc",
+    "storage_bucket": "spotbuy-fafdc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43317420718:android:0267981444ccc23bde433f",
+        "android_client_info": {
+          "package_name": "com.s19mobility.spotbuy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "43317420718-edcdv21vhet91rhn2vpgvel0h592g6h4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.s19mobility.spotbuy",
+            "certificate_hash": "00af2b04507e3bf8a2242ce5caeeb9841279e75c"
+          }
+        },
+        {
+          "client_id": "43317420718-gotpjv803ehsmqldj9id5n8d25is29el.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.s19mobility.spotbuy",
+            "certificate_hash": "b30a34d967a10aaf2b30fa401c63e1e8ca1b0bb1"
+          }
+        },
+        {
+          "client_id": "43317420718-nb74frjkkppqom8sducmj70jrorhfor2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.s19mobility.spotbuy",
+            "certificate_hash": "cdf90feb5aa1e7fedc72e0a8d5447274e6d95742"
+          }
+        },
+        {
+          "client_id": "43317420718-oeu2gmcdvcqdlmeaceg8cc1f5f90f1se.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.s19mobility.spotbuy",
+            "certificate_hash": "48bb586a62bdab41e4ed26fbccc1dba31e81731b"
+          }
+        },
+        {
+          "client_id": "43317420718-skvtd9cs6rfl7sesirlgkkcleukle1tg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.s19mobility.spotbuy",
+            "certificate_hash": "953ab619cfd3aa538b5563581cb5247582f7ee7f"
+          }
+        },
+        {
+          "client_id": "43317420718-usvf7iigi0ssfc03fis2vr0ri49g2p3d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.s19mobility.spotbuy",
+            "certificate_hash": "8cc235d26163d619b113794454051ee893766cb0"
+          }
+        },
+        {
+          "client_id": "43317420718-tnrufj4pbqs7o9u243qo9cqfui666ror.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUobHw-zphmbnqYZuHaqaGzLGFF_Xlqr0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "43317420718-tnrufj4pbqs7o9u243qo9cqfui666ror.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43317420718:android:248764a1f81d9d40de433f",
+        "android_client_info": {
+          "package_name": "com.spotmobility.spotbuy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "43317420718-8329sboa16v0a74vhudi77nea74v1ndu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spotmobility.spotbuy",
+            "certificate_hash": "953ab619cfd3aa538b5563581cb5247582f7ee7f"
+          }
+        },
+        {
+          "client_id": "43317420718-gp0rbmoe73r07vnidve0c7i85n71q7rs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spotmobility.spotbuy",
+            "certificate_hash": "8cc235d26163d619b113794454051ee893766cb0"
+          }
+        },
+        {
+          "client_id": "43317420718-tnrufj4pbqs7o9u243qo9cqfui666ror.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUobHw-zphmbnqYZuHaqaGzLGFF_Xlqr0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "43317420718-tnrufj4pbqs7o9u243qo9cqfui666ror.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
