@@ -55,6 +55,10 @@ class _ProfileFormState extends State<ProfileForm> {
     await FirebaseFirestore.instance.collection('users').doc(cUser().uid).set({
       'name': name,
       'uid': cUser().uid,
+      'contact' : '',
+      'address' : '',
+      'email' : '',
+      'gender' : '',
       'maxSellCount': 3,
     }).then((value) {
       Navigator.of(context).pushAndRemoveUntil(

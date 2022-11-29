@@ -155,17 +155,17 @@ class AdsScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => EditScreen(
-                                  docId: vehicleList[index].dbId!,
-                                  vehicleModel: vehicleList[index],
-                                ),
-                              ));
-                            },
-                            child: const Text('Edit'),
-                          ),
+                          // ElevatedButton(
+                          //   onPressed: () {
+                          //     Navigator.of(context).push(MaterialPageRoute(
+                          //       builder: (context) => EditScreen(
+                          //         docId: vehicleList[index].dbId!,
+                          //         vehicleModel: vehicleList[index],
+                          //       ),
+                          //     ));
+                          //   },
+                          //   child: const Text('Edit'),
+                          // ),
                         ],
                       ),
                       SizedBox(

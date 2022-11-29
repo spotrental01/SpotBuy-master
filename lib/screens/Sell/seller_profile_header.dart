@@ -145,7 +145,7 @@ class _SellerProfileHeaderState extends State<SellerProfileHeader> {
                     onPressed: () async {
                       var number = '${snapshot.data!.get('contact')}'; //set the number here
 
-                      //await FlutterPhoneDirectCaller.callNumber(number);
+                     // await FlutterPhoneDirectCaller.callNumber(number);
                       final snackBar = SnackBar(
                         content: Text('Calling to ${number}'),
                       );

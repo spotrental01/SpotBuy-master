@@ -30,12 +30,19 @@ class MainVehicleList extends StatelessWidget {
               .collection('vehicle_database')
               .snapshots(),
           builder: (context, snapshot) {
+            if(snapshot.hasError){
+              return Center(
+                child: Text("No item found!!!"),
+              );
+            }
             if (!snapshot.hasData) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
             }
             var data = snapshot.data!.docs as List;
+
+            print("Temprory Data is:- $data");
             // print(data[0]['image']);\
             // data.forEach((element) {});
             fetchData(data, context);
@@ -50,13 +57,14 @@ class MainVehicleList extends StatelessWidget {
               itemBuilder: (context, index) =>*/
               children: [
                 for (var index = 0; index < vehicleList.length; index++)
+                  index != null ?
                   InkWell(
                     onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => VehicleDetailScreen(
                             docId: snapshot.data!.docs[index].id,
-                            vehicleType: snapshot.data!.docs[index].get('vehicleType'),
+                            vehicleType: snapshot.data!.docs[index].get('vehicleType'), itemBy: snapshot.data!.docs[index].get('itemBy'),
                           ),
                         )),
                     child: Card(
@@ -80,10 +88,10 @@ class MainVehicleList extends StatelessWidget {
                                     itemCount: vehicleList[index].image.length,
                                     itemBuilder: (context, inde) => Container(
                                       margin: const EdgeInsets.only(right: 10),
-                                      width: MediaQuery.of(context).size.width,
+                                      // width: MediaQuery.of(context).size.width,
                                       child: Image.network(
                                         vehicleList[index].image[inde],
-                                        fit: BoxFit.fitWidth,
+                                        fit: BoxFit.fill,
                                       ),
                                     ),
                                   ),
@@ -95,7 +103,7 @@ class MainVehicleList extends StatelessWidget {
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: getProportionateScreenWidth(30),
+                                      fontSize: getProportionateScreenWidth(25),
                                     ),
                                   ),
                                 ),
@@ -224,7 +232,9 @@ class MainVehicleList extends StatelessWidget {
                         ),
                       ),
                     ),
-                  )
+                  ):Center(
+                    child: CircularProgressIndicator(),
+                  ),
               ],
             );
           }),

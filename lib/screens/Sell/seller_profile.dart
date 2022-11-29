@@ -117,7 +117,7 @@ class _SellerProfileState extends State<SellerProfile> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => VehicleDetailScreen(
-                                  docId: snapshot.data!.id, vehicleType: snapshot.data!.get('vehicleType'),
+                                  docId: snapshot.data!.id, vehicleType: snapshot.data!.get('vehicleType'), itemBy: snapshot.data!.get('itemBy'),
                                 ),
                               )),
                           child: CustomCard(
