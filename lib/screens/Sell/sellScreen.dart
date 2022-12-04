@@ -512,6 +512,7 @@ class _OptionsState extends State<Options> {
   }
 
   void savePost() async {
+
     var vi = widget.isEdit
         ? 0
         : Provider.of<CategoriesProvider>(context, listen: false)
@@ -1310,6 +1311,7 @@ class _OptionsState extends State<Options> {
                     ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Enter Description')));
                   }
+
                   if (isSellAmountEmpty) {
                     ScaffoldMessenger.of(context).clearSnackBars();
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -1317,6 +1319,7 @@ class _OptionsState extends State<Options> {
                   }
 
                   savePost();
+
                 }
               },
               child: const Text(

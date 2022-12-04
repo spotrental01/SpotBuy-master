@@ -80,13 +80,6 @@ class CategoriesProvider with ChangeNotifier {
       isSelected: false,
     ),
 
-
-    CategoriesModel(
-      id: 111,
-      image: 'assets/images/bus.png',
-      name: 'Others',
-      isSelected: false,
-    ),
   ];
 
   List<CategoriesModel> get items {

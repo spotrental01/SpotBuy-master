@@ -235,7 +235,7 @@ class AdsScreen extends StatelessWidget {
                         height: getProportionateScreenWidth(10),
                       ),
                       Text(
-                        '${vehicleList[index].sellAmount} \u{20B9}',
+                        '${vehicleList[index].sellAmount.toInt()} \u{20B9}',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: getProportionateScreenWidth(30),

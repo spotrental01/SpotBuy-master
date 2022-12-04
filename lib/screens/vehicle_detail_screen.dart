@@ -1,9 +1,10 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
-//import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
@@ -15,7 +16,8 @@ class VehicleDetailScreen extends StatefulWidget {
   String vehicleType;
   String itemBy;
 
-  VehicleDetailScreen({required this.docId, required this.vehicleType,required this.itemBy});
+  VehicleDetailScreen(
+      {required this.docId, required this.vehicleType, required this.itemBy});
 
   @override
   State<VehicleDetailScreen> createState() => _VehicleDetailScreenState();
@@ -46,7 +48,9 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
           ),
         );
   }
+
   String contact = '';
+
   void getData() async {
     await FirebaseFirestore.instance
         .collection('users')
@@ -55,15 +59,15 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
         .then(
           (snapshot) => snapshot.docs.forEach(
             (document) {
-              print("contact field from users collection:- ${document.get('contact')}");
+              print(
+                  "contact field from users collection:- ${document.get('contact')}");
               contact = document.get('contact');
-          print(document.reference);
-          setState(() {});
-        },
-      ),
-    );
+              print(document.reference);
+              setState(() {});
+            },
+          ),
+        );
   }
-
 
   @override
   void initState() {
@@ -130,7 +134,8 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                 child: Column(
                   children: [
                     Expanded(
-                      child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                      child:
+                          StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
                         stream: FirebaseFirestore.instance
                             .collection('vehicle_database')
                             .doc(widget.docId)
@@ -155,7 +160,8 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                                       children: image.map((String image) {
                                         return Image.network(
                                           image,
-                                          width: MediaQuery.of(context).size.width,
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           fit: BoxFit.cover,
                                         );
                                       }).toList(),
@@ -179,7 +185,8 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                                 Padding(
                                   padding: const EdgeInsets.all(12.0),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
                                         mainAxisAlignment:
@@ -207,14 +214,14 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                                           ),
                                           Chip(
                                             backgroundColor: Colors.cyanAccent,
-                                            label:
-                                                Text(snapshot.data!.get("yearModel")),
+                                            label: Text(snapshot.data!
+                                                .get("yearModel")),
                                           ),
                                         ],
                                       ),
                                       const SizedBox(height: 10),
                                       Text(
-                                        "₹ ${snapshot.data!.get("sellAmount")}",
+                                        "₹ ${snapshot.data!.get("sellAmount").toInt()}",
                                         style: const TextStyle(
                                           fontSize: 21,
                                           fontWeight: FontWeight.w600,
@@ -243,8 +250,8 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                                                     height: 20,
                                                   ),
                                                   const SizedBox(width: 5),
-                                                  Text(
-                                                      snapshot.data!.get("fuelType")),
+                                                  Text(snapshot.data!
+                                                      .get("fuelType")),
                                                   const SizedBox(width: 120),
                                                   Image.asset(
                                                     'assets/icons/range_icon.png',
@@ -268,21 +275,25 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                                                       const Icon(Icons.person),
                                                       const SizedBox(width: 5),
                                                       const Text("Owner"),
-                                                      const SizedBox(width: 120),
-                                                      const Icon(
-                                                          Icons.location_on_outlined),
+                                                      const SizedBox(
+                                                          width: 120),
+                                                      const Icon(Icons
+                                                          .location_on_outlined),
                                                       const SizedBox(width: 5),
                                                       Text(snapshot.data!
                                                           .get("place")),
                                                     ],
                                                   ),
                                                   Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        left: 30),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 30),
                                                     child: Text(
-                                                      snapshot.data!.get("ownerNo"),
+                                                      snapshot.data!
+                                                          .get("ownerNo"),
                                                       style: const TextStyle(
-                                                        fontWeight: FontWeight.bold,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                     ),
                                                   )
@@ -295,8 +306,9 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                                       isGoogleAd
                                           ? Center(
                                               child: Padding(
-                                                padding: const EdgeInsets.symmetric(
-                                                    vertical: 20),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 20),
                                                 child: Container(
                                                   color: Colors.pink[100],
                                                   width: 250,
@@ -306,7 +318,8 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                                                       "Google Ads.",
                                                       style: TextStyle(
                                                         fontSize: 20,
-                                                        fontWeight: FontWeight.bold,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                     ),
                                                   ),
@@ -330,7 +343,8 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                                       Card(
                                         elevation: 10,
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                         ),
                                         child: Padding(
                                           padding: const EdgeInsets.all(10),
@@ -339,9 +353,10 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                                               Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                  builder: (context) => SellerProfile(
-                                                    itemBy:
-                                                        snapshot.data!.get('itemBy'),
+                                                  builder: (context) =>
+                                                      SellerProfile(
+                                                    itemBy: snapshot.data!
+                                                        .get('itemBy'),
                                                   ),
                                                 ),
                                               );
@@ -352,12 +367,14 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                                                   height: 65,
                                                   width: 65,
                                                   child: CircleAvatar(
-                                                    backgroundColor: Colors.brown,
+                                                    backgroundColor:
+                                                        Colors.brown,
                                                     child: Text(
                                                       "DP",
                                                       style: TextStyle(
                                                         color: Colors.black,
-                                                        fontWeight: FontWeight.bold,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                         fontSize: 20,
                                                       ),
                                                     ),
@@ -380,7 +397,8 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                                                           .get("itemByName"),
                                                       style: const TextStyle(
                                                         fontSize: 20,
-                                                        fontWeight: FontWeight.bold,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                     ),
                                                     const Text(
@@ -429,8 +447,9 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                                       isGoogleAd
                                           ? Center(
                                               child: Padding(
-                                                padding: const EdgeInsets.symmetric(
-                                                    vertical: 20),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 20),
                                                 child: Container(
                                                   color: Colors.pink[100],
                                                   width: 250,
@@ -440,7 +459,8 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                                                       "Google Ads.",
                                                       style: TextStyle(
                                                         fontSize: 20,
-                                                        fontWeight: FontWeight.bold,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                       ),
                                                     ),
                                                   ),
@@ -455,7 +475,8 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                             );
                           }
                           ;
-                          return const Center(child: CircularProgressIndicator());
+                          return const Center(
+                              child: CircularProgressIndicator());
                         },
                       ),
                     ),
@@ -500,7 +521,6 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                         },
                       ),
                     ),
-
                   ],
                 ),
               ),
@@ -512,34 +532,47 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
               ElevatedButton.icon(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Color(0xff2E3C5D)),
-                  fixedSize: MaterialStateProperty.all(const Size(170, 10),),
+                  fixedSize: MaterialStateProperty.all(
+                    const Size(170, 10),
+                  ),
                 ),
-                icon: Icon(Icons.message_outlined,color: Colors.white,),
-                onPressed: () {
-                },
-                label: const Text("Message",style: TextStyle(
+                icon: Icon(
+                  Icons.message_outlined,
                   color: Colors.white,
-                ),),
+                ),
+                onPressed: () {},
+                label: const Text(
+                  "Message",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
               ),
               ElevatedButton.icon(
-                icon: Icon(Icons.call,color: Colors.white,),
-                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Color(0xff2E3C5D)),
-
-                  fixedSize: MaterialStateProperty.all(const Size(170, 10),),
+                icon: Icon(
+                  Icons.call,
+                  color: Colors.white,
+                ),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Color(0xff2E3C5D)),
+                  fixedSize: MaterialStateProperty.all(
+                    const Size(170, 10),
+                  ),
                 ),
                 onPressed: () async {
-
-                 // await FlutterPhoneDirectCaller.callNumber("+91 $contact");
+                  await FlutterPhoneDirectCaller.callNumber("+91 $contact");
                   final snackBar = SnackBar(
-                    content: Text('Calling to ${contact}'),
+                    content: Text('Calling to $contact'),
                   );
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 },
-                label: const Text("Call",style: TextStyle(
-                  color: Colors.white,
-                ),),
+                label: const Text(
+                  "Call",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
               ),
-
             ],
           ),
         ],
