@@ -23,7 +23,7 @@ class MainVehicleList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    final double itemHeight = size.height * .416;
+    final double itemHeight = size.height * .316;
     final double itemWidth = size.width / 2;
     return Expanded(
       child: StreamBuilder<QuerySnapshot>(
@@ -41,6 +41,7 @@ class MainVehicleList extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             }
+
             var data = snapshot.data!.docs as List;
 
             print("Temprory Data is:- $data");
@@ -74,222 +75,44 @@ class MainVehicleList extends StatelessWidget {
                                   ),
                                 )),
                             child: Card(
-                              elevation: 5,
-                              child: Padding(
-                                padding: EdgeInsets.all(
-                                    getProportionateScreenWidth(2)),
+                              child: Container(
+                                padding: EdgeInsets.all(8),
                                 child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      /*crossAxisAlignment: CrossAxisAlignment.start,*/
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        SizedBox(
-                                          height: 140,
-                                          child: ListView.builder(
-                                            shrinkWrap: true,
-                                            scrollDirection: Axis.horizontal,
-                                            itemCount:
-                                                vehicleList[index].image.length,
-                                            itemBuilder: (context, inde) =>
-                                                Container(
-                                              margin: const EdgeInsets.only(
-                                                  right: 10),
-                                              // width: MediaQuery.of(context).size.width,
-                                              child: Image.network(
-                                                vehicleList[index].image[inde],
-                                                fit: BoxFit.fill,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment: Alignment.topCenter,
-                                          child: Text(
-                                            vehicleList[index].title,
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize:
-                                                  getProportionateScreenWidth(
-                                                      25),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height:
-                                              getProportionateScreenHeight(1),
-                                        ),
-
-                                        /*Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Chip(
-                                    backgroundColor: const Color(0xFFF5AAAA),
-                                    label: Text(
-                                      vehicleList[index].ownerNo + ' owner',
-                                      style: TextStyle(
-                                        fontSize: getProportionateScreenWidth(15),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: getProportionateScreenWidth(5),
-                                  ),
-                                  Chip(
-                                    backgroundColor: const Color(0xFFBAF4AA),
-                                    label: Text(
-                                      vehicleList[index].kmDriven + ' KM',
-                                      style: TextStyle(
-                                        fontSize: getProportionateScreenWidth(15),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: getProportionateScreenWidth(5),
-                                  ),
-                                  Chip(
-                                    backgroundColor: const Color(0xFFAAD2F5),
-                                    label: Text(
-                                      vehicleList[index].fuelType,
-                                      style: TextStyle(
-                                        fontSize: getProportionateScreenWidth(15),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),*/
-                                        /*Text(
-                                'Description',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: getProportionateScreenWidth(20),
-                                ),
-                              ),
-                              Text(
-                                vehicleList[index].descriptionText,
-                                style: TextStyle(
-                                  // fontWeight: FontWeight.bold,
-                                  fontSize: getProportionateScreenWidth(15),
-                                ),
-                              ),*/
-                                        SizedBox(
-                                          height:
-                                              getProportionateScreenWidth(1),
-                                        ),
-                                        // Text(
-                                        //   '\u{20B9}${vehicleList[index].sellAmount.toInt()}',
-                                        //   textAlign: TextAlign.start,
-                                        //   style: TextStyle(
-                                        //     fontSize: 20,
-                                        //     fontWeight: FontWeight.w500,
-                                        //   ),
-                                        // ),
-                                        // Row(
-                                        //   mainAxisAlignment: MainAxisAlignment.center,
-                                        //   children: [
-                                        //     Text(
-                                        //       "${vehicleList[index]
-                                        //           .yearModel
-                                        //           .characters
-                                        //           .take(4)
-                                        //           .toString()} ",
-                                        //       textAlign: TextAlign.start,
-                                        //       style: TextStyle(
-                                        //         fontSize: 18,
-                                        //       ),
-                                        //     ),
-                                        //     Text(
-                                        //       "-${vehicleList[index].fuelType}",
-                                        //       textAlign: TextAlign.start,
-                                        //       style: TextStyle(
-                                        //         fontSize: 18,
-                                        //       ),
-                                        //     ),
-                                        //   ],
-                                        // ),
-                                        Chip(
-                                          backgroundColor: Colors.cyanAccent,
-                                          label: Text(
-                                            '\u{20B9}${vehicleList[index].sellAmount.toInt()}',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize:
-                                                  getProportionateScreenWidth(
-                                                      23),
-                                            ),
-                                          ),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Chip(
-                                              backgroundColor: Colors.yellow,
-                                              label: Text(
-                                                vehicleList[index]
-                                                    .yearModel
-                                                    .characters
-                                                    .take(4)
-                                                    .toString(),
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize:
-                                                      getProportionateScreenWidth(
-                                                          15),
-                                                ),
-                                              ),
-                                            ),
-                                            Chip(
-                                              backgroundColor:
-                                                  const Color(0xFFAAD2F5),
-                                              label: Text(
-                                                vehicleList[index].fuelType,
-                                                style: TextStyle(
-                                                  fontSize:
-                                                      getProportionateScreenWidth(
-                                                          15),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
                                     SizedBox(
-                                      width: double.infinity,
-                                      height: getProportionateScreenHeight(50),
-                                      child: ElevatedButton.icon(
-                                        onPressed: () {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ChatScreen(
-                                                        toId: vehicleList[index]
-                                                            .itemBy,
-                                                        name: vehicleList[index]
-                                                            .itemByName,
-                                                      )));
-                                        },
-                                        icon: const Icon(Icons.message),
-                                        label: Text(
-                                          'Start chatting'.toUpperCase(),
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize:
-                                                getProportionateScreenWidth(15),
-                                          ),
-                                        ),
+                                        height: 140,
+                                        child: Image.network(snapshot
+                                            .data!.docs[index]
+                                            .get('image')[0])),
+                                    Text(
+                                      "${snapshot.data!.docs[index].get('brand')} ${snapshot.data!.docs[index].get('vehicle')}",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Rs ${snapshot.data!.docs[index].get('sellAmount')}",
+                                      style: TextStyle(
+                                        letterSpacing: 1,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Text(
+                                      "${snapshot.data!.docs[index].get('yearModel')} | ${snapshot.data!.docs[index].get('kmDriven')}KM",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
                             ),
+
                           ),
                         )
                       : Center(

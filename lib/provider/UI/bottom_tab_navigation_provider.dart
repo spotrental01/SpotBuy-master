@@ -26,7 +26,7 @@ class TabNavigationItemsData {
         TabNavigationItem(
           page: const SellScreen(),
           icon: const Icon(Icons.sell),
-          title: 'Sell',
+          title: 'Post',
         ),
       ];
 }

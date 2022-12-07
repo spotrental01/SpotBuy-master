@@ -41,7 +41,7 @@ class _loginScreenState extends State<loginScreen> {
     });
     try {
       final authCredential =
-      await _auth.signInWithCredential(phoneAuthCredential);
+          await _auth.signInWithCredential(phoneAuthCredential);
 
       setState(() {
         showLoading = false;
@@ -50,7 +50,7 @@ class _loginScreenState extends State<loginScreen> {
           MaterialPageRoute(
             builder: (context) => MyApp(),
           ),
-              (route) => false);
+          (route) => false);
 
       // if (authCredential.user != null) {
       //   // print('user');
@@ -82,7 +82,7 @@ class _loginScreenState extends State<loginScreen> {
       });
 
       //_scaffoldKey.currentState!
-       //   .showSnackBar(SnackBar(content: Text(e.message!)));
+      //   .showSnackBar(SnackBar(content: Text(e.message!)));
     }
   }
 
@@ -118,33 +118,44 @@ class _loginScreenState extends State<loginScreen> {
                     shape: BoxShape.rectangle,
                     border: Border.all(color: Colors.black),
                     borderRadius: BorderRadius.circular(5)),
-                child: TextField(
-                  keyboardType: TextInputType.phone,
-                  controller: phoneController,
-
-
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    errorBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
-                    focusedErrorBorder: InputBorder.none,
-
-                    hintText: " +91 | Phone Number",
-                    hintStyle: TextStyle(
-                      color: Colors.black,
+                child: Row(
+                  children: [
+                    SizedBox(width: 5),
+                    Text(
+                      "+91 ",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15,
+                      ),
                     ),
-                    contentPadding: EdgeInsets.only(
-                      left: 5,
+                    Expanded(
+                      child: TextField(
+                        keyboardType: TextInputType.phone,
+                        controller: phoneController,
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                          focusedErrorBorder: InputBorder.none,
+                          hintText: "  Phone Number",
+                          hintStyle: TextStyle(
+                            color: Colors.black,
+                          ),
+                          contentPadding: EdgeInsets.only(
+                            left: 5,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
               const SizedBox(
                 height: 16,
               ),
-                TextButton(
+              ElevatedButton(
                 onPressed: () async {
                   setState(() {
                     showLoading = true;
@@ -160,8 +171,8 @@ class _loginScreenState extends State<loginScreen> {
                       setState(() {
                         showLoading = false;
                       });
-                    //   _scaffoldKey.currentState!.showSnackBar(
-                    //       SnackBar(content: Text(verificationFailed.message!)));
+                      //   _scaffoldKey.currentState!.showSnackBar(
+                      //       SnackBar(content: Text(verificationFailed.message!)));
                     },
                     codeSent: (verificationId, resendingToken) async {
                       setState(() {
@@ -177,14 +188,14 @@ class _loginScreenState extends State<loginScreen> {
                 //padding: const EdgeInsets.all(8.0),
                 child: const Text(
                   "SEND OTP",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
                 ),
                 // Color: const Color(0xff00c4cc),
-               // textColor: Colors.white,
-               // shape: RoundedRectangleBorder(
-               //   borderRadius: BorderRadius.circular(5),
-               //   side: BorderSide(color: Colors.black),
-                ),
+                // textColor: Colors.white,
+                // shape: RoundedRectangleBorder(
+                //   borderRadius: BorderRadius.circular(5),
+                //   side: BorderSide(color: Colors.black),
+              ),
               //),
             ],
           ),
@@ -247,25 +258,25 @@ class _loginScreenState extends State<loginScreen> {
               const SizedBox(
                 height: 16,
               ),
-               TextButton(
+              ElevatedButton(
                 onPressed: () async {
                   AuthCredential phoneAuthCredential =
-                  PhoneAuthProvider.credential(
-                      verificationId: verificationId,
-                      smsCode: otpController.text);
+                      PhoneAuthProvider.credential(
+                          verificationId: verificationId,
+                          smsCode: otpController.text);
 
                   signInWithPhoneAuthCredential(phoneAuthCredential);
                 },
                 child: const Text(
                   "VERIFY OTP",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
                 ),
                 //color: const Color(0xff00c4cc),
                 //textColor: Colors.white,
-               // shape: RoundedRectangleBorder(
-                 // borderRadius: BorderRadius.circular(5),
-                 // side: BorderSide(color: Colors.black),
-                ),
+                // shape: RoundedRectangleBorder(
+                // borderRadius: BorderRadius.circular(5),
+                // side: BorderSide(color: Colors.black),
+              ),
               //),
             ],
           ),
@@ -288,29 +299,29 @@ class _loginScreenState extends State<loginScreen> {
             Container(
               child: showLoading
                   ? const Center(
-                child: CircularProgressIndicator(),
-              )
+                      child: CircularProgressIndicator(),
+                    )
                   : currentState ==
-                  MobileVerificationState.SHOW_MOBILE_FORM_STATE
-                  ? getMobileFormWidget(context)
-                  : getOtpFormWidget(context),
+                          MobileVerificationState.SHOW_MOBILE_FORM_STATE
+                      ? getMobileFormWidget(context)
+                      : getOtpFormWidget(context),
               padding: const EdgeInsets.all(16),
             ),
             showLoading
                 ? const Center(
-              child: CircularProgressIndicator(),
-            )
+                    child: CircularProgressIndicator(),
+                  )
                 : Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                child: Image(
-                  image: currentState ==
-                      MobileVerificationState.SHOW_MOBILE_FORM_STATE
-                      ? const AssetImage('assets/images/login_page.png')
-                      : const AssetImage("assets/images/login2.png"),
-                ),
-              ),
-            )
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      child: Image(
+                        image: currentState ==
+                                MobileVerificationState.SHOW_MOBILE_FORM_STATE
+                            ? const AssetImage('assets/images/login_page.png')
+                            : const AssetImage("assets/images/login2.png"),
+                      ),
+                    ),
+                  )
           ],
         ));
   }
@@ -322,7 +333,7 @@ class Spotbuylogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AssetImage assetImage =
-    const AssetImage('assets/images/spotbuy@1X _371.png');
+        const AssetImage('assets/images/spotbuy@1X _371.png');
     Image image = Image(image: assetImage);
     return Container(
       child: image,

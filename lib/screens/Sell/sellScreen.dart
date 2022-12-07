@@ -205,9 +205,9 @@ class SellScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.center,
                     child: Text(
-                      "Sell",
+                      "Post",
                       style: TextStyle(
                         fontSize: 50,
                         fontFamily: 'SEGOEUI',
@@ -512,7 +512,6 @@ class _OptionsState extends State<Options> {
   }
 
   void savePost() async {
-
     var vi = widget.isEdit
         ? 0
         : Provider.of<CategoriesProvider>(context, listen: false)
@@ -524,13 +523,13 @@ class _OptionsState extends State<Options> {
       'kmDriven': kmsController.text.trim(),
       'sellAmount': double.parse(priceController.text.trim()),
       'descriptionText': descriptionController.text.trim(),
-      'vehicle': dropdownvehiclesvalue,
+      'vehicle': dropdownVehiclevalue,
       'ownerNo': dropownervalue,
       'place': place,
       'fuelType': dropdownfueltypevalue,
-      'title': dropdownBrandvalue + ' ' + dropdownvehiclesvalue,
+      'title': dropdownBrandvalue + ' ' + dropdownVehiclevalue,
       'vehicleType': dropdowncategoryvalue,
-      'yearModel': dropdownmodelvalue + ' model',
+      'yearModel': dropdownmodelvalue,
       'vehicleId': vi,
       'itemBy': cUser().uid,
       'itemByName': cUser().displayName,
@@ -548,7 +547,7 @@ class _OptionsState extends State<Options> {
             double.parse(priceController.text.trim()),
         isDescriptionTextEmpty ? 'chache' : 'descriptionText':
             descriptionController.text.trim(),
-        isVehicleEmpty ? 'chache' : 'vehicle': dropdownvehiclesvalue,
+        isVehicleEmpty ? 'chache' : 'vehicle': dropdownVehiclevalue,
         isOwnerNoEmpty ? 'chache' : 'ownerNo': dropownervalue,
         isFuelTypeEmpty ? 'chache' : 'fuelType': dropdownfueltypevalue,
         isBrandEmpty || isModelEmpty ? 'chache' : 'title':
@@ -594,7 +593,6 @@ class _OptionsState extends State<Options> {
 
   List<String> vehicleItems = [];
   late Map<String, dynamic> selectedVehicle;
-  String dropdownvehiclesvalue = '   Vehicles';
 
   String dropdowncategoryvalue = '   Category';
   List<String> categoryItems = [];
@@ -623,6 +621,8 @@ class _OptionsState extends State<Options> {
     '   Manual',
     '   Auto',
   ];
+
+  late DateTime _selectedDate;
 
   @override
   Widget build(BuildContext context) {
@@ -686,8 +686,6 @@ class _OptionsState extends State<Options> {
             height: 20,
           ),
 
-
-
           //Category
           StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
@@ -714,6 +712,7 @@ class _OptionsState extends State<Options> {
                   border: Border.all(color: Colors.black, width: 1),
                 ),
                 child: DropdownButton(
+
                   underline: const SizedBox(),
                   isExpanded: true,
                   value: dropdowncategoryvalue,
@@ -737,7 +736,6 @@ class _OptionsState extends State<Options> {
             height: 20,
           ),
 
-
           //Brand DropDown
           StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
@@ -757,9 +755,8 @@ class _OptionsState extends State<Options> {
                 child: brandDataList == null
                     ? CircularProgressIndicator()
                     : Padding(
-                      padding: const EdgeInsets.only(left: 13),
-                      child: DropdownButton(
-
+                        padding: const EdgeInsets.only(left: 13),
+                        child: DropdownButton(
                           underline: const SizedBox(),
                           isExpanded: true,
                           // Initial Value
@@ -777,7 +774,7 @@ class _OptionsState extends State<Options> {
                             });
                           },
                         ),
-                    ),
+                      ),
               );
             },
           ),
@@ -786,7 +783,7 @@ class _OptionsState extends State<Options> {
             height: 20,
           ),
 
-          //Brand DropDown
+          //Vehicle DropDown
           StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection('info_vehicle')
@@ -805,8 +802,8 @@ class _OptionsState extends State<Options> {
                 child: vehicleDataList == null
                     ? CircularProgressIndicator()
                     : Padding(
-                  padding: const EdgeInsets.only(left: 13),
-                      child: DropdownButton(
+                        padding: const EdgeInsets.only(left: 13),
+                        child: DropdownButton(
                           underline: const SizedBox(),
                           isExpanded: true,
                           // Initial Value
@@ -824,7 +821,7 @@ class _OptionsState extends State<Options> {
                             });
                           },
                         ),
-                    ),
+                      ),
               );
             },
           ),
@@ -859,9 +856,38 @@ class _OptionsState extends State<Options> {
           // // model
           GestureDetector(
             onTap: () async {
-              final todayDate = DateTime.now();
+              // showDialog(
+              //   context: context,
+              //   builder: (BuildContext context) {
+              //     return AlertDialog(
+              //       title: Text("Select Year"),
+              //       content: Container(
+              //         width: 300,
+              //         height: 300,
+              //         child: YearPicker(
+              //           firstDate: DateTime(DateTime.now().year - 100, 1),
+              //           lastDate: DateTime(DateTime.now().year + 100, 1),
+              //           initialDate: DateTime.now(),
+              //           selectedDate: _selectedDate,
+              //           onChanged: (DateTime dateTime) {
+              //             dropdownmodelvalue = _selectedDate.toString();
+              //             isModelEmpty = false;
+              //             Navigator.pop(context);
+              //           },
+              //         ),
+              //       ),
+              //     );
+              //   },
+              // );
+              // final todayDate = DateTime.now();
+              // final selected = await YearPicker(firstDate: DateTime(DateTime.now().year - 100, 1),
+              //     lastDate: DateTime(DateTime.now().year + 100, 1),
+              //     initialDate: DateTime.now(), onChanged: ( _selectedDate){
+              //     dropdownmodelvalue = _selectedDate.toString();
+              //     },selectedDate: _selectedDate,);
               final selected = await showMonthYearPicker(
                   context: context,
+                  initialMonthYearPickerMode: MonthYearPickerMode.year,
                   initialDate: DateTime.now(),
                   firstDate: DateTime(2008),
                   lastDate: DateTime(2200));
@@ -878,7 +904,10 @@ class _OptionsState extends State<Options> {
                 ),
                 child: Row(
                   children: [
-                    Text(dropdownmodelvalue),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10.0),
+                      child: Text(dropdownmodelvalue),
+                    ),
                     const Icon(Icons.arrow_drop_down)
                   ],
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1319,7 +1348,6 @@ class _OptionsState extends State<Options> {
                   }
 
                   savePost();
-
                 }
               },
               child: const Text(

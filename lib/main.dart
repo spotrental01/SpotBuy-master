@@ -12,6 +12,7 @@ import 'package:spotbuy/screens/home_screen.dart';
 import 'package:spotbuy/provider/Vehicle/vehicle_list_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:spotbuy/screens/profile.dart/profile_page.dart';
+import 'package:spotbuy/screens/splash_screen.dart';
 import 'provider/User/user_topup_provider.dart';
 import 'Utils/theme.dart';
 import 'Utils/routes.dart';
@@ -96,21 +97,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: theme(),
           routes: routes,
-          home: StreamBuilder(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                if (cUser().displayName == null) {
-                  print('in main above profile');
-                  return const Profilepage();
-                }
-                print('in main above tab');
-                return TabsPage();
-              }
-              print('in main above login');
-              return const loginScreen();
-            },
-          )),
+          home: SplashScreen()),
     );
   }
 }

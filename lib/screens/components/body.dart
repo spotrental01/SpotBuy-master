@@ -38,7 +38,24 @@ class Body extends StatelessWidget {
                 SizedBox(
                   height: getProportionateScreenWidth(10),
                 ),
-
+                Container(
+                  width: double.infinity,
+                  height: 60,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(1)),
+                      prefixIcon: Icon(Icons.search,color: Colors.black54,),
+                      hintText: "Search vehicle"
+                        ,hintStyle: TextStyle(
+                      fontSize: 19,
+                      color: Colors.black54,
+                    )
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: getProportionateScreenWidth(10),
+                ),
                 // selected category text
                 Text(
                   selectedCategory.name,

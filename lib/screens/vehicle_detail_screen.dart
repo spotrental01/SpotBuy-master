@@ -5,9 +5,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
+import '../provider/Vehicle/vehicle_list_provider.dart';
+import 'ChatRoom/chat_screen.dart';
 import 'Sell/seller_profile.dart';
 
 class VehicleDetailScreen extends StatefulWidget {
@@ -29,6 +32,7 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
   bool isGoogleAd = false;
   List<dynamic> docIDDemo = [];
   List<String> docIDs = [];
+  String itemByName = '';
 
   Future<void> getDocId() async {
     await FirebaseFirestore.instance
@@ -130,7 +134,7 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
           Expanded(
             child: SingleChildScrollView(
               child: SizedBox(
-                height: 1040,
+                height: 930,
                 child: Column(
                   children: [
                     Expanded(
@@ -145,6 +149,7 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                             return Text('Error = ${snapshot.error}');
 
                           if (snapshot.hasData) {
+                            itemByName = snapshot.data!.get('itemByName');
                             imageRaw = snapshot.data!.get('image');
                             image = imageRaw.map((e) => e.toString()).toList();
                             return Column(
@@ -154,8 +159,8 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                                 Stack(
                                   children: [
                                     ImageSlideshow(
-                                      autoPlayInterval: 3000,
-                                      isLoop: image.length > 1 ? true : false,
+                                      // autoPlayInterval: 3000,
+                                      // isLoop: image.length > 1 ? true : false,
                                       width: double.infinity,
                                       children: image.map((String image) {
                                         return Image.network(
@@ -274,9 +279,16 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                                                     children: [
                                                       const Icon(Icons.person),
                                                       const SizedBox(width: 5),
-                                                      const Text("Owner"),
+                                                      Text(
+                                                        snapshot.data!
+                                                            .get("ownerNo"),
+                                                        style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
                                                       const SizedBox(
-                                                          width: 120),
+                                                          width: 140),
                                                       const Icon(Icons
                                                           .location_on_outlined),
                                                       const SizedBox(width: 5),
@@ -284,19 +296,6 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                                                           .get("place")),
                                                     ],
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 30),
-                                                    child: Text(
-                                                      snapshot.data!
-                                                          .get("ownerNo"),
-                                                      style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  )
                                                 ],
                                               ),
                                             ],
@@ -349,7 +348,7 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                                         child: Padding(
                                           padding: const EdgeInsets.all(10),
                                           child: InkWell(
-                                            onTap: () {
+                                            onTap: ()  {
                                               Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
@@ -423,7 +422,6 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                                           fontSize: 20,
                                         ),
                                       ),
-                                      const SizedBox(height: 10),
                                       // Row(
                                       //   children: [
                                       //     RelatedAdsWidgets(
@@ -444,30 +442,28 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                                       //   ],
                                       // ),
                                       const SizedBox(height: 10),
-                                      isGoogleAd
-                                          ? Center(
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 20),
-                                                child: Container(
-                                                  color: Colors.pink[100],
-                                                  width: 250,
-                                                  height: 125,
-                                                  child: const Center(
-                                                    child: Text(
-                                                      "Google Ads.",
-                                                      style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            )
-                                          : SizedBox(),
+                                      // Center(
+                                      //         child: Padding(
+                                      //           padding:
+                                      //               const EdgeInsets.symmetric(
+                                      //                   vertical: 20),
+                                      //           child: Container(
+                                      //             color: Colors.pink[100],
+                                      //             width: 250,
+                                      //             height: 125,
+                                      //             child: const Center(
+                                      //               child: Text(
+                                      //                 "Google Ads.",
+                                      //                 style: TextStyle(
+                                      //                   fontSize: 20,
+                                      //                   fontWeight:
+                                      //                       FontWeight.bold,
+                                      //                 ),
+                                      //               ),
+                                      //             ),
+                                      //           ),
+                                      //         ),
+                                      //       ),
                                     ],
                                   ),
                                 ),
@@ -480,45 +476,63 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                         },
                       ),
                     ),
-                    SizedBox(
-                      height: 230,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: docIDs.length,
-                        itemBuilder: (_, index) {
-                          return StreamBuilder<
-                              DocumentSnapshot<Map<String, dynamic>>>(
-                            stream: FirebaseFirestore.instance
-                                .collection('vehicle_database')
-                                .doc(docIDs[index])
-                                .snapshots(),
-                            builder: (_, snapshot) {
-                              print("Snapshot Data of related ads:- $snapshot");
-                              if (snapshot.hasError) {
-                                return Column(
-                                  children: [
-                                    Text('Error = ${snapshot.error}'),
-                                    CircularProgressIndicator(),
-                                  ],
-                                );
-                              }
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: SizedBox(
+                        height: 230,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: docIDs.length,
+                          itemBuilder: (_, index) {
+                            return StreamBuilder<
+                                    DocumentSnapshot<Map<String, dynamic>>>(
+                                stream: FirebaseFirestore.instance
+                                    .collection('vehicle_database')
+                                    .doc(docIDs[index])
+                                    .snapshots(),
+                                builder: (_, snapshot) {
+                                  print(
+                                      "Snapshot Data of related ads:- $snapshot");
+                                  if (snapshot.hasError) {
+                                    return Column(
+                                      children: [
+                                        Text('Error = ${snapshot.error}'),
+                                        CircularProgressIndicator(),
+                                      ],
+                                    );
+                                  }
 
-                              if (snapshot.hasData) {
-                                List<dynamic> relatedImage = [];
-                                relatedImage = snapshot.data!.get('image');
-                                return RelatedAdsWidgets(
-                                  snapshot.data!.get('sellAmount'),
-                                  snapshot.data!.get('title'),
-                                  relatedImage[0],
-                                );
-                                // return Text(snapshot.data!.get('title'));
-                              }
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            },
-                          );
-                        },
+                                  List<dynamic> relatedImage = [];
+                                  relatedImage = snapshot.data!.get('image');
+                                  if (widget.docId == snapshot.data!.id) {
+                                    return SizedBox();
+                                  } else {
+                                    return InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  VehicleDetailScreen(
+                                                docId: snapshot.data!.id,
+                                                vehicleType: snapshot.data!
+                                                    .get('vehicleType'),
+                                                itemBy: snapshot.data!
+                                                    .get('itemBy'),
+                                              ),
+                                            ));
+                                      },
+                                      child: RelatedAdsWidgets(
+                                        snapshot.data!.get('sellAmount'),
+                                        snapshot.data!.get('title'),
+                                        relatedImage[0],
+                                      ),
+                                    );
+                                  }
+                                  // return Text(snapshot.data!.get('title'));
+                                });
+                          },
+                        ),
                       ),
                     ),
                   ],
@@ -533,14 +547,20 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Color(0xff2E3C5D)),
                   fixedSize: MaterialStateProperty.all(
-                    const Size(170, 10),
+                    const Size(170, 40),
                   ),
                 ),
                 icon: Icon(
                   Icons.message_outlined,
                   color: Colors.white,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ChatScreen(
+                            toId: widget.itemBy,
+                            name: itemByName,
+                          )));
+                },
                 label: const Text(
                   "Message",
                   style: TextStyle(
@@ -556,7 +576,7 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Color(0xff2E3C5D)),
                   fixedSize: MaterialStateProperty.all(
-                    const Size(170, 10),
+                    const Size(170, 40),
                   ),
                 ),
                 onPressed: () async {
@@ -575,6 +595,7 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
               ),
             ],
           ),
+          SizedBox(height: 10),
         ],
       ),
     );
@@ -582,14 +603,14 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
 
   Widget RelatedAdsWidgets(price, name, imageURL) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+      padding: const EdgeInsets.fromLTRB(0, 10, 10, 50),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(17),
         ),
         elevation: 10,
         child: SizedBox(
-          height: 140,
+          height: 120,
           width: 120,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -602,7 +623,7 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                   fit: BoxFit.cover,
                 ),
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: 5),
               Padding(
                 padding: const EdgeInsets.only(left: 5),
                 child: Column(
@@ -610,13 +631,13 @@ class _VehicleDetailScreenState extends State<VehicleDetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "\$$price",
+                      "\u{20B9}$price",
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 7),
+                    const SizedBox(height: 3),
                     Text(
                       name,
                       textAlign: TextAlign.justify,

@@ -55,111 +55,111 @@ class _SellerProfileHeaderState extends State<SellerProfileHeader> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  subtitle: Text(
-                    snapshot.data!.get('maxSellCount').toString(),
-                    style: TextStyle(
-                      fontSize: 17,
-                      color: Colors.black,
-                    ),
-                  ),
+                  // subtitle: Text(
+                  //   snapshot.data!.get('maxSellCount').toString(),
+                  //   style: TextStyle(
+                  //     fontSize: 17,
+                  //     color: Colors.black,
+                  //   ),
+                  // ),
                 ),
               ),
               const Divider(
                 thickness: 3,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: const [
-                      CircleAvatar(
-                        backgroundColor: Colors.cyanAccent,
-                        child: Text(
-                          "12",
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        "Post",
-                        style: TextStyle(
-                          fontSize: 17,
-                        ),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: const [
-                      CircleAvatar(
-                        backgroundColor: Colors.cyanAccent,
-                        child: Text(
-                          "434",
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        "Followers",
-                        style: TextStyle(
-                          fontSize: 17,
-                        ),
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: const [
-                      CircleAvatar(
-                        backgroundColor: Colors.cyanAccent,
-                        child: Text(
-                          "500",
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        "Following",
-                        style: TextStyle(
-                          fontSize: 17,
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                width: 120,
-                child: ElevatedButton(
-                  onPressed: () {},
-
-                  child: const Text("Follow"),
-                ),
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton.icon(icon: Icon(Icons.call),
-                    onPressed: () async {
-                      var number = '${snapshot.data!.get('contact')}'; //set the number here
-
-                     // await FlutterPhoneDirectCaller.callNumber(number);
-                      final snackBar = SnackBar(
-                        content: Text('Calling to ${number}'),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    },
-                    label: const Text("Call"),
-                  ),
-                  ElevatedButton.icon(
-                    icon: Icon(Icons.message_outlined),
-                    onPressed: () {},
-                    label: const Text("Message"),
-                  ),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     Column(
+              //       children: const [
+              //         CircleAvatar(
+              //           backgroundColor: Colors.cyanAccent,
+              //           child: Text(
+              //             "12",
+              //             style: TextStyle(
+              //               color: Colors.black,
+              //             ),
+              //           ),
+              //         ),
+              //         Text(
+              //           "Post",
+              //           style: TextStyle(
+              //             fontSize: 17,
+              //           ),
+              //         )
+              //       ],
+              //     ),
+              //     Column(
+              //       children: const [
+              //         CircleAvatar(
+              //           backgroundColor: Colors.cyanAccent,
+              //           child: Text(
+              //             "434",
+              //             style: TextStyle(
+              //               color: Colors.black,
+              //             ),
+              //           ),
+              //         ),
+              //         Text(
+              //           "Followers",
+              //           style: TextStyle(
+              //             fontSize: 17,
+              //           ),
+              //         )
+              //       ],
+              //     ),
+              //     Column(
+              //       children: const [
+              //         CircleAvatar(
+              //           backgroundColor: Colors.cyanAccent,
+              //           child: Text(
+              //             "500",
+              //             style: TextStyle(
+              //               color: Colors.black,
+              //             ),
+              //           ),
+              //         ),
+              //         Text(
+              //           "Following",
+              //           style: TextStyle(
+              //             fontSize: 17,
+              //           ),
+              //         )
+              //       ],
+              //     ),
+              //   ],
+              // ),
+              // SizedBox(
+              //   width: 120,
+              //   child: ElevatedButton(
+              //     onPressed: () {},
+              //
+              //     child: const Text("Follow"),
+              //   ),
+              // ),
+              // SizedBox(height: 20),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     ElevatedButton.icon(icon: Icon(Icons.call),
+              //       onPressed: () async {
+              //         var number = '${snapshot.data!.get('contact')}'; //set the number here
+              //
+              //        // await FlutterPhoneDirectCaller.callNumber(number);
+              //         final snackBar = SnackBar(
+              //           content: Text('Calling to ${number}'),
+              //         );
+              //         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              //       },
+              //       label: const Text("Call"),
+              //     ),
+              //     ElevatedButton.icon(
+              //       icon: Icon(Icons.message_outlined),
+              //       onPressed: () {},
+              //       label: const Text("Message"),
+              //     ),
+              //   ],
+              // ),
             ],
           );
         }

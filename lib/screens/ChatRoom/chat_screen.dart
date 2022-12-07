@@ -36,16 +36,16 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color(0xff2E3C5D),
         actions: [
           IconButton(
             color: Colors.white,
             onPressed: () {
               _makePhoneCall('tel:1234567890');
             },
-            icon: const Icon(Icons.call,color: Colors.black,),
+            icon: const Icon(Icons.call,color: Colors.white,),
           ),
         ],
-        backgroundColor: Colors.white,
         toolbarHeight: 70,
         titleSpacing: 0,
         title: Row(
@@ -61,14 +61,14 @@ class ChatScreen extends StatelessWidget {
                 name,
                 style: const TextStyle(
                   fontSize: 22,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
             ),
           ],
         ), // You can add title here
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -242,7 +242,7 @@ class _TypeMessageState extends State<TypeMessage> {
             padding: const EdgeInsets.all(10),
             child: Row(
               children: [
-                attachFile(),
+                // attachFile(),
                 SizedBox(width: 10,),
                 Expanded(
                   child: Container(

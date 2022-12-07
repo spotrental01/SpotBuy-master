@@ -62,14 +62,14 @@ class _SellerProfileState extends State<SellerProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.indigo,
+        backgroundColor: const Color(0xff2E3C5D),
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
-        title: const Text("Seller Profile"),
+        title: const Text("Profile"),
       ),
       body: SafeArea(
         child: Column(
@@ -171,7 +171,7 @@ class _SellerProfileState extends State<SellerProfile> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "\$$price",
+                  "₹$price",
                   style: const TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
