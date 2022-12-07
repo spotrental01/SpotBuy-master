@@ -94,7 +94,7 @@ class MainVehicleList extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      "Rs ${snapshot.data!.docs[index].get('sellAmount')}",
+                                      "Rs ${snapshot.data!.docs[index].get('sellAmount').toInt()}",
                                       style: TextStyle(
                                         letterSpacing: 1,
                                         fontSize: 22,
