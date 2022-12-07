@@ -67,7 +67,7 @@ class _SellerProfileState extends State<SellerProfile> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          icon: const Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios,color: Colors.white,),
         ),
         title: const Text("Profile",style: TextStyle(color: Colors.white)),
       ),
