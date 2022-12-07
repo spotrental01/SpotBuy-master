@@ -69,7 +69,7 @@ class _SellerProfileState extends State<SellerProfile> {
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
-        title: const Text("Profile"),
+        title: const Text("Profile",style: TextStyle(color: Colors.white)),
       ),
       body: SafeArea(
         child: Column(
